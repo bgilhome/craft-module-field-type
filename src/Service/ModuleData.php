@@ -46,7 +46,7 @@ class ModuleData
      */
     public function getModuleField(MatrixBlock $matrixBlock): ModuleField
     {
-        foreach ($matrixBlock->getFieldLayout()->getFields() as $field) {
+        foreach ($matrixBlock->getFieldLayout()->getCustomFields() as $field) {
             //  just return the very first field of type ModuleField … any other fields are not of interest for us
             if ($field instanceof ModuleField) {
                 return $field;

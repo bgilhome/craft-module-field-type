@@ -35,7 +35,7 @@ abstract class ModuleField extends Field
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $rules = parent::rules();
         $rules = array_merge($rules, $this->getAttributeValidationRules());
@@ -69,7 +69,7 @@ abstract class ModuleField extends Field
      * appended as well.
      * @see \yii\db\QueryBuilder::getColumnType()
      */
-    public function getContentColumnType(): string
+    public function getContentColumnType(): array|string
     {
         return Schema::TYPE_TEXT;
     }
@@ -87,7 +87,7 @@ abstract class ModuleField extends Field
      *
      * @return mixed The prepared field value
      */
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         $value = is_string($value) ? Json::decodeIfJson($value, false) : $value;
 
@@ -114,7 +114,7 @@ abstract class ModuleField extends Field
      *
      * @return mixed The serialized field value
      */
-    public function serializeValue($value, ElementInterface $element = null)
+    public function serializeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         if ($value instanceof \stdClass) {
             foreach ($this->getSubfields() as $subfield) {
@@ -223,7 +223,7 @@ abstract class ModuleField extends Field
      * @throws \Twig\Error\RuntimeError
      * @throws \Twig\Error\SyntaxError
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         // Render the settings template
         return Craft::$app->getView()->renderTemplate(
@@ -336,7 +336,7 @@ abstract class ModuleField extends Field
      * @throws \Twig\Error\SyntaxError
      * @throws \yii\base\InvalidConfigException
      */
-    public function getInputHtml($value, ElementInterface $element = null): string
+    public function getInputHtml(mixed $value, ?\craft\base\ElementInterface $element = null): string
     {
         $view = Craft::$app->getView();
 
